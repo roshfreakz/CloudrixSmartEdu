@@ -54,7 +54,7 @@
 
         function DoGetUserList() {
             $.ajax({
-                url: 'helper/postuser.php',
+                url: 'postuser.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({

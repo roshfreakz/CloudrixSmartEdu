@@ -172,7 +172,7 @@
                 } else {
                     var formData = new FormData(this);
                     $.ajax({
-                        url: 'helper/postuser.php',
+                        url: 'postuser.php',
                         type: 'POST',
                         datatype: 'json',
                         data: formData,
@@ -199,7 +199,7 @@
 
         function DoGetUserList() {
             $.ajax({
-                url: 'helper/postuser.php',
+                url: 'postuser.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({

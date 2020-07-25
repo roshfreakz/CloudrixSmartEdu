@@ -71,13 +71,11 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-6 d-none">
                                         <div class="form-group">
                                             <label class="label-control">UserType</label>
-                                            <select class="form-control form-control-lg" name="UserType">
-                                                <option value="">Select User Type</option>
-                                                <option>Staff</option>
-                                                <option>Student</option>
+                                            <select class="form-control form-control-lg" name="UserType">                                             
+                                                <option selected>Student</option>
                                             </select>
                                         </div>
                                     </div>
@@ -140,12 +138,12 @@
                 var Username = $("input[name=Username]").val();
                 var Password = $("input[name=Password]").val();
                 var CPassword = $("input[name=CPassword]").val();
-                if (!FullName || !Email || !Mobile || !UserType || !Username || !Password || !CPassword || Password != CPassword) {
+                if (!FullName || !Email || !Mobile || !Username || !Password || !CPassword || Password != CPassword) {
                     $('.form-control').addClass('is-invalid');
                 } else {
                     var formData = new FormData(this);
                     $.ajax({
-                        url: 'helper/postuser.php',
+                        url: 'postuser.php',
                         type: 'POST',
                         datatype: 'json',
                         data: formData,

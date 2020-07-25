@@ -51,17 +51,3 @@ if (isset($_GET["getassign"]) && !empty($_GET["getassign"])) {
     }
 }
 
-if (isset($_GET["getjoined"]) && !empty($_GET["getjoined"])) {
-
-    $RoomId = testinput($_GET["RoomId"]);
-    $sql = 'SELECT u.* from tbl_assign a left outer join tbl_user u on u.UserId = a.UserId where a.RoomId = :RoomId';
-    $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':RoomId', $RoomId, PDO::PARAM_STR);
-    try {
-        $stmt->execute();
-        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        print_r(json_encode($results));
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-}

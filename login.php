@@ -75,7 +75,7 @@ session_destroy();
         } else {
           var formData = new FormData(this);
           $.ajax({
-            url: 'helper/postuser.php',
+            url: 'postuser.php',
             type: 'POST',
             datatype: 'json',
             data: formData,

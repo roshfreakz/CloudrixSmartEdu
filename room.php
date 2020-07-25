@@ -163,7 +163,7 @@
                 } else {
                     var formData = new FormData(this);
                     $.ajax({
-                        url: 'helper/postroom.php',
+                        url: 'postroom.php',
                         type: 'POST',
                         datatype: 'json',
                         data: formData,
@@ -204,7 +204,7 @@
                             addassign: 1
                         };
                         $.ajax({
-                            url: 'helper/postassign.php',
+                            url: 'postassign.php',
                             type: 'POST',
                             datatype: 'json',
                             data: formData,
@@ -237,7 +237,7 @@
 
         function DoGetRoomList() {
             $.ajax({
-                url: 'helper/postroom.php',
+                url: 'postroom.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({
@@ -293,7 +293,7 @@
 
         function DoGetUserDropdown() {
             $.ajax({
-                url: 'helper/postuser.php',
+                url: 'postuser.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({
@@ -315,7 +315,7 @@
             $('#dupuser').hide();
             $('select[name=UserId]').remove('is-invalid');
             $.ajax({
-                url: 'helper/postassign.php',
+                url: 'postassign.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({

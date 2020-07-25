@@ -34,7 +34,7 @@
                                                 <div class="form-group">
                                                     <label class="form-label">Gender</label>
                                                     <div class="row">
-                                                        <div class="col-4">
+                                                        <div class="col-lg-4 col-12">
                                                             <div class="form-check">
                                                                 <label class="form-check-label">
                                                                     <input type="radio" class="form-check-input" name="Gender" id="Male" value="Male" checked>
@@ -42,7 +42,7 @@
                                                                 </label>
                                                             </div>
                                                         </div>
-                                                        <div class="col-4">
+                                                        <div class="col-lg-4 col-12">
                                                             <div class="form-check">
                                                                 <label class="form-check-label">
                                                                     <input type="radio" class="form-check-input" name="Gender" id="Female" value="Female">
@@ -87,8 +87,7 @@
                                             <div class="col-md-12 text-right">
                                                 <input type="hidden" name="registeruser" value="1">
                                                 <button type="submit" class="btn btn-gradient-success mr-2">Update</button>
-                                                <button class="btn btn-light" onclick="ToggleAddUser()">Cancel</button>
-                                            </div>
+                                            </div>                                            
                                         </div>
                                     </form>
                                 </div>
@@ -118,7 +117,7 @@
                 } else {
                     var formData = new FormData(this);
                     $.ajax({
-                        url: 'helper/postuser.php',
+                        url: 'postuser.php',
                         type: 'POST',
                         datatype: 'json',
                         data: formData,

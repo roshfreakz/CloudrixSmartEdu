@@ -1,4 +1,4 @@
-<?php require('helper/session.php'); ?>
+<?php require('session.php'); ?>
 
 <head>
     <meta charset="utf-8">
