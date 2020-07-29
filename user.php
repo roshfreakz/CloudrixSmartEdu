@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require('header.php'); ?>
+<?php require_once('_header.php'); ?>
 
 <body>
     <div class="container-scroller">
-        <?php require('navbar.php'); ?>
+        <?php require_once('_navbar.php'); ?>
         <div class="container-fluid page-body-wrapper">
-            <?php require('sidebar.php'); ?>
+            <?php require_once('_sidebar.php'); ?>
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="page-header">
@@ -116,7 +116,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-md-12 text-right">
-                                                <input type="hidden" name="registeruser" value="1">
+                                                <input type="hidden" name="adduser" value="1">
                                                 <button type="submit" class="btn btn-gradient-success mr-2">Save</button>
                                                 <button class="btn btn-light" onclick="ToggleAddUser()">Cancel</button>
                                             </div>
@@ -151,7 +151,7 @@
             </div>
         </div>
     </div>
-    <?php require('footer.php'); ?>
+    <?php require_once('_footer.php'); ?>
     <script>
         $(function() {
             DoGetUserList();
@@ -172,7 +172,7 @@
                 } else {
                     var formData = new FormData(this);
                     $.ajax({
-                        url: 'postuser.php',
+                        url: 'helper/_user.php',
                         type: 'POST',
                         datatype: 'json',
                         data: formData,
@@ -199,7 +199,7 @@
 
         function DoGetUserList() {
             $.ajax({
-                url: 'postuser.php',
+                url: 'helper/_user.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({

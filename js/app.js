@@ -1,7 +1,3 @@
-
-
-
-
 (function ($) {
   'use strict';
   //Open submenu on hover in compact sidebar mode and horizontal menu mode
@@ -133,6 +129,17 @@
     //checkbox and radios
     $(".form-check label,.form-radio label").append('<i class="input-helper"></i>');
 
-
+ 
   });
 })(jQuery);
+
+
+function ShowLoadingBtn() {
+  $('button[type="submit"]').html('<i class="spinner-border"></i>');
+  $('button[type="submit"]').prop('disabled', true);
+}
+
+function HideLoadingBtn(arg) {
+  $('button[type="submit"]').html(arg);
+  $('button[type="submit"]').prop('disabled', false);
+}

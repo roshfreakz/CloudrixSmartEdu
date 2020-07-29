@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require('header.php'); ?>
+<?php require_once('_header.php'); ?>
 
 <body>
     <div class="container-scroller">
-        <?php require('navbar.php'); ?>
+        <?php require_once('_navbar.php'); ?>
         <div class="container-fluid page-body-wrapper">
-            <?php require('sidebar.php'); ?>
+            <?php require_once('_sidebar.php'); ?>
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="page-header">
@@ -15,17 +15,49 @@
                                 <i class="mdi mdi-contacts menu-icon"></i>
                             </span>
                             My Profile
-                        </h3>                      
+                        </h3>
+                        <button type="button" class="btn btn-gradient-primary" onclick="ToggleChangePassword()">Change Password</button>
+                    </div>
+                    <div class="row" id="divChangePassword" style="display: none;">
+                        <div class="col-12 grid-margin">
+                            <div class="card">
+                                <div class="card-body">
+                                    <form class="form-sample" id="ChangePasswordForm">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label class="label">Password</label>
+                                                    <input type="password" class="form-control" id="Password" name="Password" placeholder="Strong Password" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="form-group">
+                                                    <label class="label">Confirm Password</label>
+                                                    <input type="password" class="form-control" id="CPassword" placeholder="Confirm Password" />
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2 text-right">
+                                                <label class="d-block">&nbsp;</label>
+                                                <input type="hidden" name="UserId" value="<?php echo $_SESSION["UserId"]; ?>">
+                                                <input type="hidden" name="changepassword" value="1">
+                                                <button type="submit" class="btn btn-gradient-success">Change</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row" id="divAddUser">
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="form-sample" id="AddUserForm">
+
+                                    <form class="form-sample" id="UpdateUserForm">
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Name</label>
+                                                    <label class="form-label">Full Name</label>
                                                     <input type="text" class="form-control" name="FullName" placeholder="Your Full Name" />
                                                 </div>
                                             </div>
@@ -53,71 +85,58 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                         </div>
                                         <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label">Email</label>
+                                                    <input class="form-control" name="Email" placeholder="Your Email" disabled />
+                                                </div>
+                                            </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="label">Mobile</label>
                                                     <input class="form-control" name="Mobile" placeholder="Your Mobile" />
                                                 </div>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="label">Email</label>
-                                                    <input class="form-control" name="Email" placeholder="Your Email" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <div class="form-group">
-                                                    <label class="label">User Type</label>
-                                                    <select class="form-control" name="UserType">
-                                                        <option value="">Select Type</option>
-                                                        <option>Admin</option>
-                                                        <option>Staff</option>
-                                                        <option>Student</option>
-                                                    </select>
-                                                </div>
-                                            </div>
 
                                         </div>
-                                       
+
                                         <div class="row">
                                             <div class="col-md-12 text-right">
-                                                <input type="hidden" name="registeruser" value="1">
-                                                <button type="submit" class="btn btn-gradient-success mr-2">Update</button>
-                                            </div>                                            
+                                                <input type="hidden" name="UserId" value="<?php echo $_SESSION["UserId"]; ?>">
+                                                <input type="hidden" name="updateuser" value="1">
+                                                <button type="submit" class="btn btn-gradient-success">Update</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
-                    </div>                   
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php require('footer.php'); ?>
+    <?php require_once('_footer.php'); ?>
     <script>
-      
+        $(function() {
+            DoGetUserDetailsList();
+        });
 
         $(function() {
-            $('#AddUserForm').on('submit', function(e) {
+            $('#UpdateUserForm').on('submit', function(e) {
                 e.preventDefault();
+                $('#UpdateUserForm .form-control').removeClass('is-invalid');
                 var FullName = $("input[name=FullName]").val();
                 var Mobile = $("input[name=Mobile]").val();
-                var Email = $("input[name=Email]").val();
-                var UserType = $("select[name=UserType]").val();
-                var Username = $("input[name=Username]").val();
-                var Password = $("input[name=Password]").val();
-                var CPassword = $("input[name=CPassword]").val();
-                if (!FullName || !Email || !Mobile || !UserType || !Username || !Password || !CPassword || Password != CPassword) {
-                    $('.form-control').addClass('is-invalid');
+                if (!FullName || !Mobile) {
+                    $('#UpdateUserForm .form-control').addClass('is-invalid');
                 } else {
                     var formData = new FormData(this);
                     $.ajax({
-                        url: 'postuser.php',
+                        url: 'helper/_user.php',
                         type: 'POST',
                         datatype: 'json',
                         data: formData,
@@ -126,10 +145,8 @@
                         processData: false,
                     }).done(function(result) {
                         if (result == "1") {
-                            $('.form-control').val('');
-                            $('input:radio[id=Male]').prop('checked', true);
-                            ToggleAddUser();
-                            DoGetUserList();
+                            DoGetUserDetailsList();
+                            alert("User details Updated");
                         } else {
                             console.log(result);
                         }
@@ -137,7 +154,63 @@
                 }
             });
         });
-      
+
+        $(function() {
+            $('#ChangePasswordForm').on('submit', function(e) {
+                e.preventDefault();
+                $('#ChangePasswordForm .form-control').removeClass('is-invalid');
+                var Password = $("#Password").val();
+                var CPassword = $("#CPassword").val();
+                if (!Password || !CPassword || Password != CPassword) {
+                    $('#ChangePasswordForm .form-control').addClass('is-invalid');
+                } else {
+                    var formData = new FormData(this);
+                    $.ajax({
+                        url: 'helper/_user.php',
+                        type: 'POST',
+                        datatype: 'json',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                    }).done(function(result) {
+                        if (result == "1") {
+                            $('#ChangePasswordForm .form-control').val('');
+                            ToggleChangePassword();
+                            alert("Password Updated");
+                        } else {
+                            console.log(result);
+                        }
+                    });
+                }
+            });
+        });
+
+        function ToggleChangePassword() {
+            $("#divChangePassword").slideToggle();
+        }
+
+        function DoGetUserDetailsList() {
+            $.ajax({
+                url: 'helper/_user.php',
+                type: "GET",
+                dataType: 'json',
+                data: ({
+                    getusers: true,
+                    getuserdetails: true,
+                    UserId: "<?php echo $_SESSION["UserId"]; ?>"
+                }),
+            }).done(function(result) {
+                var data = result[0];
+                $('input[name="FullName"]').val(data.FullName);
+                if (data.Gender == "Female") $('#Female').attr('checked', true);
+                else $('#Male').attr('checked', true);
+                $('input[name="Mobile"]').val(data.Mobile);
+                $('input[name="Email"]').val(data.Email);
+            }).fail(function(result) {
+                console.log(result.responseText);
+            })
+        }
     </script>
 </body>
 

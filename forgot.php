@@ -27,26 +27,19 @@ session_destroy();
               <div class="brand-logo">
                 <img src="img/logo.png">
               </div>
-              <h4>Login</h4>
+              <h4>Forgot Password</h4>
               <form class="pt-3" id="LoginForm">
                 <div class="form-group">
-                  <label>Username</label>
-                  <input type="text" class="form-control form-control-lg" name="Username" id="Username" placeholder="Username">
+                  <label>Email Id</label>
+                  <input type="email" class="form-control form-control-lg" name="Email" id="Email" placeholder="Email Id">
                   <div class="invalid-feedback">Invalid Username</div>
                 </div>
-                <div class="form-group">
-                  <label>Password</label>
-                  <input type="password" class="form-control form-control-lg" name="Password" id="Password" placeholder="Password">
-                  <div class="invalid-feedback">Invalid Password</div>
-                </div>
                 <div class="mt-3">
-                  <input type="hidden" name="checklogin" value="1">
-                  <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="index.php">Login</button>
+                  <input type="hidden" name="checkemail" value="1">
+                  <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="index.php">
+                  Submit</button>
                 </div>
-                <div class="my-4 text-center">                 
-                  <a href="forgot.php" class="auth-link text-black">Forgot password?</a>
-                </div>
-                <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="register.php" class="text-primary">Create</a>
+                <div class="text-center mt-4 font-weight-light"> Remember Password? <a href="login.php" class="text-primary">Login</a>
                 </div>
               </form>
             </div>
@@ -59,13 +52,12 @@ session_destroy();
   <script src="js/app.js"></script>
   <script>
     $(function() {
+
       $('#LoginForm').on('submit', function(e) {
         e.preventDefault();
-        $('#Username').removeClass('is-invalid');
-        $('#Password').removeClass('is-invalid');
-        var Username = $('#Username').val();
-        var Password = $('#Password').val();
-        if (!Username || !Password) {
+        $('#Email').removeClass('is-invalid');
+        var Email = $('#Email').val();
+        if (!Email) {
           $('.form-control').addClass('is-invalid');
         } else {
           var formData = new FormData(this);
@@ -79,22 +71,22 @@ session_destroy();
             processData: false,
             beforeSend: ShowLoadingBtn
           }).always(function(result) {
-            HideLoadingBtn("Login");
+            HideLoadingBtn("Submit");
             console.log(result);
             if (result == "1") {
-              alert('Login Success!');
+              alert('Check your mail for password reset.');
               window.location.href = "index.php";
-            } else {
-              alert('Login Failed!');
+            } else {              
               if (result == "2") {
-                $('#Password').addClass('is-invalid');
-              } else if (result == "3") {
-                $('#Username').addClass('is-invalid');
+                alert('Invalid Email');
+              } else {
+                alert(result);
               }
             }
           });
         }
       });
+
     });
   </script>
 </body>

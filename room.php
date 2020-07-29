@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require('header.php'); ?>
+<?php require_once('_header.php'); ?>
 
 <body>
     <div class="container-scroller">
-        <?php require('navbar.php'); ?>
+        <?php require_once('_navbar.php'); ?>
         <div class="container-fluid page-body-wrapper">
-            <?php require('sidebar.php'); ?>
+            <?php require_once('_sidebar.php'); ?>
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="page-header">
@@ -14,11 +14,13 @@
                             <span class="page-title-icon bg-gradient-primary text-white mr-2">
                                 <i class="mdi mdi-contacts menu-icon"></i>
                             </span>
-                            Rooms
+                            Class Rooms
                         </h3>
-                        <nav aria-label="breadcrumb">
-                            <button class="btn btn-gradient-primary" onclick="ToggleAddRoom()">Add Room</button>
-                        </nav>
+                        <?php if ($_SESSION["UserType"] != "Student") { ?>
+                            <nav aria-label="breadcrumb">
+                                <button class="btn btn-gradient-primary" onclick="ToggleAddRoom()">Add Room</button>
+                            </nav>
+                        <?php } ?>
                     </div>
                     <div class="row" id="divAddRoom" style="display: none;">
                         <div class="col-12 grid-margin">
@@ -26,7 +28,6 @@
                                 <div class="card-body">
                                     <h4 class="card-title">Add Room</h4>
                                     <form class="form-sample" id="AddRoomForm">
-                                        <p class="card-description"> Personal info </p>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -39,14 +40,14 @@
                                                     <label class="label">Room Type</label>
                                                     <select class="form-control" name="RoomType">
                                                         <option value="">Select Type</option>
-                                                        <option>Class</option>
-                                                        <option>Counselling</option>
+                                                        <option>Video Class</option>
+                                                        <option>Screen Class</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-6">
+                                            <div class="col-md-6 d-none">
                                                 <div class="form-group">
                                                     <label class="label">Status</label>
                                                     <select class="form-control" name="Status">
@@ -57,7 +58,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label class="form-label">Schdeule Date</label>
+                                                    <label class="form-label">Schedule Date</label>
                                                     <input type="datetime-local" class="form-control" name="SDate" placeholder="Schdeule Date" />
                                                 </div>
                                             </div>
@@ -79,9 +80,10 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="table-responsive">
-                                        <table class="table table-sm table-hover " id="RoomTable">
+                                        <table class="table table-sm table-hover" id="RoomTable">
                                             <thead>
                                                 <tr>
+                                                    <th></th>
                                                     <th> Room Name </th>
                                                     <th> Room Type </th>
                                                     <th> Status </th>
@@ -99,39 +101,38 @@
                         <div class="col-12 grid-margin">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="page-header">
-                                        <h3 class="page-title">
-                                            <p>Users for Room: <span class="card-title" id="RoomTitle"></span> </p>
-                                        </h3>
-                                        <nav aria-label="breadcrumb">
-                                            <button class="btn btn-gradient-info" onclick="ToggleAddAssign()">Add Users</button>
-                                        </nav>
+                                    <div class="row">
+                                        <div class="col">
+                                            <h3 class="page-title d-inline-block">
+                                                <p>Students for: <span class="card-title" id="RoomTitle"></span> </p>
+                                            </h3>
+                                        </div>
                                     </div>
-                                    <form class="form-sample" id="AddAssignForm" style="display: none;">
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <div class="form-group">
+
+
+                                    <?php if ($_SESSION["UserType"] != "Student") { ?>
+                                        <form class="form-sample w-100 d-inline-block" id="AddAssignForm">
+                                            <div class="row">
+                                                <div class="col-lg-4">
                                                     <input type="hidden" id="RoomId">
                                                     <select class="form-control" name="UserId" id="UserRoom">
-                                                        <option value="">Select User</option>
+                                                        <option value="">Select Student</option>
                                                     </select>
                                                     <div class="invalid-feedback">Invalid Data</div>
-                                                    <div class="small text-danger" style="display: none;" id="dupuser">User Already exists</div>
+                                                    <div class="small text-danger" style="display: none;" id="dupuser">Student Already exists</div>
+                                                </div>
+                                                <div class="col">
+                                                    <button type="submit" class="btn btn-gradient-primary">Add Student</button>
                                                 </div>
                                             </div>
-                                            <div class="col">
-                                                <button type="submit" class="btn btn-gradient-success mr-2">Add</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                        </form>
+                                    <?php } ?>
                                     <div class="table-responsive">
                                         <table class="table table-sm table-hover " id="userTable">
                                             <thead>
                                                 <tr>
-                                                    <th> Name </th>
-                                                    <th> Username </th>
-                                                    <th> UserType </th>
-                                                    <th> Last Update </th>
+                                                    <th style="width: 15%;"> </th>
+                                                    <th> Student Name </th>
                                                 </tr>
                                             </thead>
                                             <tbody></tbody>
@@ -145,7 +146,7 @@
             </div>
         </div>
     </div>
-    <?php require('footer.php'); ?>
+    <?php require_once('_footer.php'); ?>
     <script>
         $(function() {
             DoGetRoomList();
@@ -163,14 +164,14 @@
                 } else {
                     var formData = new FormData(this);
                     $.ajax({
-                        url: 'postroom.php',
+                        url: 'helper/_room.php',
                         type: 'POST',
                         datatype: 'json',
                         data: formData,
                         cache: false,
                         contentType: false,
                         processData: false,
-                    }).done(function(result) {
+                    }).always(function(result) {
                         if (result == "1") {
                             $('.form-control').val('');
                             ToggleAddRoom();
@@ -197,21 +198,20 @@
                     if (!RoomId || !UserId || !PeerId) {
                         $('#select[name=UserId]').addClass('is-invalid');
                     } else {
-                        var formData = {
+                        var varData = {
                             RoomId: RoomId,
                             UserId: UserId,
                             PeerId: PeerId,
                             addassign: 1
                         };
                         $.ajax({
-                            url: 'postassign.php',
+                            url: 'helper/_assign.php',
                             type: 'POST',
                             datatype: 'json',
-                            data: formData,
-                        }).done(function(result) {
+                            data: varData,
+                        }).always(function(result) {
                             if (result == "1") {
                                 $('select[name=UserId]').val('');
-                                ToggleAddAssign();
                                 DoGetUserListforRoom(RoomId);
                             } else {
                                 console.log(result);
@@ -227,33 +227,53 @@
             });
         });
 
+        var dtable;
+
         function ToggleAddRoom() {
             $('#divAddRoom').slideToggle();
         }
-
-        function ToggleAddAssign() {
-            $('#AddAssignForm').slideToggle();
-        }
-
+      
         function DoGetRoomList() {
             $.ajax({
-                url: 'postroom.php',
+                url: 'helper/_room.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({
                     "getroom": true
                 }),
-            }).done(function(result) {
-                var dtable = $('#RoomTable').DataTable({
+            }).always(function(result) {
+                dtable = $('#RoomTable').DataTable({
                     aaData: result,
                     autoWidth: false,
                     destroy: true,
+                    lengthChange: false,
+                    pageLength: 5,
                     language: {
                         search: '',
                         searchPlaceholder: "Search..."
                     },
                     order: [],
+                    columnDefs: [{
+                        targets: 0,
+                        orderable: false
+                    }],
                     columns: [{
+                            render: function(data, type, row, meta) {
+                                var dhtml = '';
+                                if (row.Status == "1") {
+                                    dhtml += '<form method="POST" action="join.php">';
+                                    dhtml += '<input type="hidden" name="RoomId" value="' + row.RoomId + '" />';
+                                    dhtml += '<input type="hidden" name="RoomName" value="' + row.RoomName + '" />';
+                                    dhtml += '<input type="hidden" name="RoomType" value="' + row.RoomType + '" />';
+                                    dhtml += '<input type="hidden" name="StaffId" value="' + row.PeerId + '" />';
+                                    dhtml += '<input type="hidden" name="StaffName" value="' + row.FullName + '" />';
+                                    dhtml += '<button class="btn btn-sm btn-gradient-primary" type="submit"> Join </button>';
+                                    dhtml += '</form>';
+                                }
+                                return dhtml;
+                            }
+                        },
+                        {
                             data: "RoomName",
                             name: "RoomName"
                         },
@@ -275,6 +295,7 @@
                                 return row.SDate;
                             }
                         },
+
                     ]
                 });
                 $('#RoomTable tbody').on('click', 'tr', function() {
@@ -288,19 +309,20 @@
                         $(this).addClass('selected');
                     }
                 });
-            })
+            });
         }
-
+       
         function DoGetUserDropdown() {
             $.ajax({
-                url: 'postuser.php',
+                url: 'helper/_user.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({
-                    "getusers": true
+                    "getusers": true,
+                    "getstudent": true
                 }),
-            }).done(function(result) {
-                var dhtml = '<option value="">Select User</option>';
+            }).always(function(result) {
+                var dhtml = '<option value="">Select Student</option>';
                 for (var i = 0; i < result.length; i++) {
                     dhtml += '<option value="' + result[i].UserId + '-' + result[i].PeerId + '">' + result[i].FullName + '</option>';
                 }
@@ -313,25 +335,37 @@
             $('#RoomId').val(RoomId);
             $('select[name=UserId]').val('');
             $('#dupuser').hide();
-            $('select[name=UserId]').remove('is-invalid');
+            $('select[name=UserId]').removeClass('is-invalid');
             $.ajax({
-                url: 'postassign.php',
+                url: 'helper/_assign.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({
                     getassign: 1,
                     RoomId: RoomId
                 }),
-            }).done(function(result) {
+            }).always(function(result) {
+                console.log(result);
                 $('#userTable').DataTable({
                     aaData: result,
                     autoWidth: false,
                     destroy: true,
+                    lengthChange: false,
                     language: {
                         search: '',
                         searchPlaceholder: "Search..."
                     },
+                    order: [],
+                    columnDefs: [{
+                        targets: 0,
+                        orderable: false
+                    }],
                     columns: [{
+                            render: function(data, type, row, meta) {
+                                return '<button class="btn btn-sm btn-gradient-danger" type="button" onclick="DoDeleteRoomUser(' + row.AssignId + ',' + row.RoomId + ')"> Remove </button>';
+                            }
+                        },
+                        {
                             render: function(data, type, row, meta) {
                                 if (row.Gender == "Male") {
                                     return '<img src="img/male.png" class="mr-2" alt="image"> ' + row.FullName;
@@ -339,30 +373,28 @@
                                     return '<img src="img/female.png" class="mr-2" alt="image"> ' + row.FullName;
                                 }
                             }
-                        },
-                        {
-                            data: "Username",
-                            name: "Username"
-                        },
-                        {
-                            render: function(data, type, row, meta) {
-                                if (row.UserType == "Admin") {
-                                    return '<label class="badge badge-gradient-primary"> ' + row.UserType + ' </label>';
-                                } else if (row.UserType == "Staff") {
-                                    return '<label class="badge badge-gradient-success"> ' + row.UserType + ' </label>';
-                                } else {
-                                    return '<label class="badge badge-gradient-warning"> ' + row.UserType + ' </label>';
-                                }
-                            }
-                        },
-                        {
-                            render: function(data, type, row, meta) {
-                                return row.CDate;
-                            }
-                        },
+                        }
                     ]
                 })
             })
+        }
+
+        function DoDeleteRoomUser(AssignId, RoomId) {
+            var cnfm = confirm("Are you sure you want to delete this student from this class?");
+            if (cnfm) {
+                $.ajax({
+                    url: 'helper/_assign.php',
+                    type: "GET",
+                    dataType: 'json',
+                    data: ({
+                        deleteRoomUser: 1,
+                        AssignId: AssignId
+                    }),
+                }).always(function(result) {
+                    alert('User Deleted Successfully');
+                    DoGetUserListforRoom(RoomId);
+                })
+            }
         }
     </script>
 </body>

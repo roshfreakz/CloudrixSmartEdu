@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php require('header.php'); ?>
+<?php require_once('_header.php'); ?>
 
 <body>
     <div class="container-scroller">
-        <?php require('navbar.php'); ?>
+        <?php require_once('_navbar.php'); ?>
         <div class="container-fluid page-body-wrapper">
-            <?php require('sidebar.php'); ?>
+            <?php require_once('_sidebar.php'); ?>
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="page-header">
@@ -44,7 +44,7 @@
             </div>
         </div>
     </div>
-    <?php require('footer.php'); ?>
+    <?php require_once('_footer.php'); ?>
     <script>
         $(function() {
             DoGetUserList();
@@ -54,10 +54,11 @@
 
         function DoGetUserList() {
             $.ajax({
-                url: 'postuser.php',
+                url: 'helper/_user.php',
                 type: "GET",
                 dataType: 'json',
                 data: ({
+                    "getusers": true,
                     "getstudent": true
                 }),
             }).done(function(result) {
