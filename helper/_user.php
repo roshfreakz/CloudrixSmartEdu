@@ -55,6 +55,22 @@ if (isset($_POST["updateuser"]) && !empty($_POST["updateuser"])) {
     }
 }
 
+
+if (isset($_POST["deleteuser"]) && !empty($_POST["deleteuser"])) {
+    $UserId = testinput($_POST["UserId"]);
+
+    $sql = ' DELETE from tbl_user where UserId = :UserId ';
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(':UserId', $UserId, PDO::PARAM_INT);
+
+    try {
+        $stmt->execute();
+        echo "1";
+    } catch (PDOException $e) {
+        echo $e->getMessage();
+    }
+}
+
 if (isset($_POST["changepassword"]) && !empty($_POST["changepassword"])) {
     $UserId = testinput($_POST["UserId"]);
     $Password = testinput($_POST["Password"]);

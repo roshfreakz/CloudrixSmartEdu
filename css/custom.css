@@ -143,6 +143,16 @@ label.badge p {
     margin-bottom: 2rem;
 }
 
+
+/* Login */
+#spnViewPassword{
+    cursor: pointer;
+}
+
+#spnViewPassword:hover{
+    color: #000;
+}
+
 @media only screen and (max-width:500px) {
     footer .selfvideo {
         width: 30vw;

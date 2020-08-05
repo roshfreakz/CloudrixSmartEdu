@@ -134,6 +134,7 @@
                                         <table class="table table-sm table-hover " id="userTable">
                                             <thead>
                                                 <tr>
+                                                    <th>  </th>
                                                     <th> Name </th>
                                                     <th> Username </th>
                                                     <th> UserType </th>
@@ -215,7 +216,13 @@
                         searchPlaceholder: "Search..."
                     },
                     // order: [],                    
-                    columns: [{
+                    columns: [
+                        {
+                            render: function(data, type, row, meta) {                              
+                                    return '<button class="btn btn-gradient-danger btn-sm" onclick="DoDeleteUser('+row.UserId+')">Delete</button>';                                
+                            }
+                        },
+                        {
                             render: function(data, type, row, meta) {
                                 if (row.Gender == "Male") {
                                     return '<img src="img/male.png" class="mr-2" alt="image"> ' + row.FullName;
@@ -246,6 +253,26 @@
                         },
                     ]
                 })
+            })
+        }
+
+        function DoDeleteUser(UserId) {
+            $.ajax({
+                url: 'helper/_user.php',
+                type: "POST",
+                dataType: 'json',
+                data: ({
+                    deleteuser: true,
+                    UserId: UserId
+                }),
+            }).always(function(result) {
+              if(result == "1"){
+                DoGetUserList();
+                alert("User Deleted Successfully!");
+              }else{
+                  console.log("result");
+                  alert("Error in Deleting User");
+              }
             })
         }
     </script>

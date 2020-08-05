@@ -36,14 +36,19 @@ session_destroy();
                 </div>
                 <div class="form-group">
                   <label>Password</label>
-                  <input type="password" class="form-control form-control-lg" name="Password" id="Password" placeholder="Password">
+                  <div class="input-group">
+                    <input type="password" class="form-control form-control-lg" name="Password" id="Password" placeholder="Password">
+                    <div class="input-group-append">
+                      <span class="input-group-text" id="spnViewPassword"> <i class="mdi mdi-eye"></i> </span>
+                    </div>
+                  </div>
                   <div class="invalid-feedback">Invalid Password</div>
                 </div>
                 <div class="mt-3">
                   <input type="hidden" name="checklogin" value="1">
                   <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="index.php">Login</button>
                 </div>
-                <div class="my-4 text-center">                 
+                <div class="my-4 text-center">
                   <a href="forgot.php" class="auth-link text-black">Forgot password?</a>
                 </div>
                 <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="register.php" class="text-primary">Create</a>
@@ -59,6 +64,21 @@ session_destroy();
   <script src="js/app.js"></script>
   <script>
     $(function() {
+
+
+      $('#spnViewPassword').on('click', function() {
+        if (this.children[0].className == "mdi mdi-eye") {
+          $(this.children[0]).removeClass('mdi mdi-eye');
+          $(this.children[0]).addClass('mdi mdi-eye-off');
+          $('#Password').attr('type', 'text');
+        }else{
+          $(this.children[0]).removeClass('mdi mdi-eye-off');
+          $(this.children[0]).addClass('mdi mdi-eye');
+          $('#Password').attr('type', 'password');
+        }
+      });
+
+
       $('#LoginForm').on('submit', function(e) {
         e.preventDefault();
         $('#Username').removeClass('is-invalid');

@@ -77,7 +77,7 @@
     <script src="js/base.js"></script>
     <script src="js/app.js"></script>
     <script>
-        $(function() {
+        $(function() {          
 
             $('#RegisterForm').on('submit', function(e) {
                 e.preventDefault();
