@@ -88,15 +88,14 @@
 
                                         </div>
                                         <p class="card-description"> Login Details </p>
-                                        <div class="row">
+                                        <!-- <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label class="label">Username</label>
                                                     <input type="text" class="form-control" name="Username" placeholder="Choose a Username" />
                                                 </div>
                                             </div>
-
-                                        </div>
+                                        </div> -->
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="form-group">
@@ -134,9 +133,9 @@
                                         <table class="table table-sm table-hover " id="userTable">
                                             <thead>
                                                 <tr>
-                                                    <th>  </th>
+                                                    <th> </th>
                                                     <th> Name </th>
-                                                    <th> Username </th>
+                                                    <th> Email </th>
                                                     <th> UserType </th>
                                                     <th> Last Update </th>
                                                 </tr>
@@ -165,10 +164,10 @@
                 var Mobile = $("input[name=Mobile]").val();
                 var Email = $("input[name=Email]").val();
                 var UserType = $("select[name=UserType]").val();
-                var Username = $("input[name=Username]").val();
+                // var Username = $("input[name=Username]").val();
                 var Password = $("input[name=Password]").val();
                 var CPassword = $("input[name=CPassword]").val();
-                if (!FullName || !Email || !Mobile || !UserType || !Username || !Password || !CPassword || Password != CPassword) {
+                if (!FullName || !Email || !Mobile || !UserType || !Password || !CPassword || Password != CPassword) {
                     $('.form-control').addClass('is-invalid');
                 } else {
                     var formData = new FormData(this);
@@ -216,10 +215,9 @@
                         searchPlaceholder: "Search..."
                     },
                     // order: [],                    
-                    columns: [
-                        {
-                            render: function(data, type, row, meta) {                              
-                                    return '<button class="btn btn-gradient-danger btn-sm" onclick="DoDeleteUser('+row.UserId+')">Delete</button>';                                
+                    columns: [{
+                            render: function(data, type, row, meta) {
+                                return '<button class="btn btn-danger btn-sm" onclick="DoDeleteUser(' + row.UserId + ')"><i class="mdi mdi-delete-forever"></i></button>';
                             }
                         },
                         {
@@ -232,17 +230,17 @@
                             }
                         },
                         {
-                            data: "Username",
-                            name: "Username"
+                            data: "Email",
+                            name: "Email"
                         },
                         {
                             render: function(data, type, row, meta) {
                                 if (row.UserType == "Admin") {
-                                    return '<label class="badge badge-gradient-primary"> ' + row.UserType + ' </label>';
-                                } else  if (row.UserType == "Staff"){
-                                    return '<label class="badge badge-gradient-success"> ' + row.UserType + ' </label>';                                
+                                    return '<label class="badge badge-primary"> ' + row.UserType + ' </label>';
+                                } else if (row.UserType == "Staff") {
+                                    return '<label class="badge badge-success"> ' + row.UserType + ' </label>';
                                 } else {
-                                    return '<label class="badge badge-gradient-warning"> ' + row.UserType + ' </label>';
+                                    return '<label class="badge badge-warning"> ' + row.UserType + ' </label>';
                                 }
                             }
                         },
@@ -266,13 +264,13 @@
                     UserId: UserId
                 }),
             }).always(function(result) {
-              if(result == "1"){
-                DoGetUserList();
-                alert("User Deleted Successfully!");
-              }else{
-                  console.log("result");
-                  alert("Error in Deleting User");
-              }
+                if (result == "1") {
+                    DoGetUserList();
+                    alert("User Deleted Successfully!");
+                } else {
+                    console.log("result");
+                    alert("Error in Deleting User");
+                }
             })
         }
     </script>

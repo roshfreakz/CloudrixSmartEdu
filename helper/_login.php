@@ -10,20 +10,18 @@ use PHPMailer\PHPMailer\Exception;
 if (isset($_POST["registeruser"]) && !empty($_POST["registeruser"])) {
     $PeerId = GetRandomString(6);
     $FullName = testinput($_POST["FullName"]);
-    $Email = testinput($_POST["Email"]);
-    $Username = testinput($_POST["Username"]);
+    $Email = testinput($_POST["Email"]);   
     $Password = testinput($_POST["Password"]);
     $PasswordHash = password_hash($Password, PASSWORD_DEFAULT);
 
     $sql = ' INSERT INTO tbl_user ' .
-        ' ( PeerId,  FullName,  Email,  UserType,  Username,  PasswordHash, CDate) VALUES ' .
-        ' (:PeerId, :FullName, :Email, "Student", :Username, :PasswordHash, Now()) ';
+        ' ( PeerId,  FullName,  Email,  UserType,  PasswordHash, CDate) VALUES ' .
+        ' (:PeerId, :FullName, :Email, "Student", :PasswordHash, Now()) ';
 
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':PeerId', $PeerId, PDO::PARAM_STR);
     $stmt->bindParam(':FullName', $FullName, PDO::PARAM_STR);
     $stmt->bindParam(':Email', $Email, PDO::PARAM_STR);
-    $stmt->bindParam(':Username', $Username, PDO::PARAM_STR);
     $stmt->bindParam(':PasswordHash', $PasswordHash, PDO::PARAM_STR);
 
     try {
@@ -36,11 +34,11 @@ if (isset($_POST["registeruser"]) && !empty($_POST["registeruser"])) {
 
 
 if (isset($_POST["checklogin"]) && !empty($_POST["checklogin"])) {
-    $Username = testinput($_POST["Username"]);
+    $Email = testinput($_POST["Email"]);
     $Password = testinput($_POST["Password"]);
-    $sql = 'SELECT * from tbl_user WHERE Username = :Username';
+    $sql = 'SELECT * from tbl_user WHERE Email = :Email';
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(':Username', $Username, PDO::PARAM_STR);
+    $stmt->bindParam(':Email', $Email, PDO::PARAM_STR);
     try {
         $stmt->execute();
         $row = $stmt->fetch();

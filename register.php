@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/mdi.min.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/login.css">
 </head>
 
 <body>
@@ -17,7 +17,7 @@
         <div class="container-fluid page-body-wrapper full-page-wrapper">
             <div class="content-wrapper d-flex align-items-center auth">
                 <div class="row flex-grow">
-                    <div class="col-lg-4 col-md-6 col-12 mx-auto">
+                    <div class="col-lg-4 col-md-6 col-12 ml-auto">
                         <div class="auth-form-light text-left">
                             <div class="brand-logo">
                                 <img src="img/logo.png">
@@ -36,13 +36,7 @@
                                             <label class="label-control">Email</label>
                                             <input type="text" class="form-control form-control-lg" name="Email" placeholder="Your Email">
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-group">
-                                            <label class="label-control">Username</label>
-                                            <input type="text" class="form-control form-control-lg" name="Username" placeholder="Choose a Username">
-                                        </div>
-                                    </div>
+                                    </div>                                   
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label class="label-control">Password</label>
@@ -63,7 +57,7 @@
                                     <input type="hidden" name="registeruser" value="1">
                                     <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="login.php">Register</button>
                                 </div>
-                                <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="login.php" class="text-primary">Login</a>
+                                <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="login.php">Login</a>
                                 </div>
                             </form>
                         </div>
@@ -83,10 +77,9 @@
                 e.preventDefault();
                 var FullName = $("input[name=FullName]").val();
                 var Email = $("input[name=Email]").val();
-                var Username = $("input[name=Username]").val();
                 var Password = $("input[name=Password]").val();
                 var CPassword = $("input[name=CPassword]").val();
-                if (!FullName || !Email || !Username || !Password || !CPassword || Password != CPassword) {
+                if (!FullName || !Email || !Password || !CPassword || Password != CPassword) {
                     $('.form-control').addClass('is-invalid');
                 } else {
                     var formData = new FormData(this);

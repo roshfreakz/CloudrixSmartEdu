@@ -66,7 +66,7 @@
                                         <div class="row">
                                             <div class="col-md-12 text-right">
                                                 <input type="hidden" name="addroom" value="1">
-                                                <button type="submit" class="btn btn-gradient-success mr-2">Save</button>
+                                                <button type="submit" class="btn btn-success mr-2">Save</button>
                                                 <button class="btn btn-light" onclick="ToggleAddRoom()">Cancel</button>
                                             </div>
                                         </div>
@@ -122,7 +122,7 @@
                                                     <div class="small text-danger" style="display: none;" id="dupuser">Student Already exists</div>
                                                 </div>
                                                 <div class="col">
-                                                    <button type="submit" class="btn btn-gradient-primary">Add Student</button>
+                                                    <button type="submit" class="btn btn-primary">Add Student</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -267,7 +267,7 @@
                                     dhtml += '<input type="hidden" name="RoomType" value="' + row.RoomType + '" />';
                                     dhtml += '<input type="hidden" name="StaffId" value="' + row.PeerId + '" />';
                                     dhtml += '<input type="hidden" name="StaffName" value="' + row.FullName + '" />';
-                                    dhtml += '<button class="btn btn-sm btn-gradient-primary" type="submit"> Join </button>';
+                                    dhtml += '<button class="btn btn-sm btn-primary" type="submit"> Join </button>';
                                     dhtml += '</form>';
                                 }
                                 return dhtml;
@@ -284,9 +284,9 @@
                         {
                             render: function(data, type, row, meta) {
                                 if (row.Status == "1") {
-                                    return '<label class="badge badge-gradient-success"> Active </label>';
+                                    return '<label class="badge badge-success"> Active </label>';
                                 } else {
-                                    return '<label class="badge badge-gradient-secondary"> Closed </label>';
+                                    return '<label class="badge badge-secondary"> Closed </label>';
                                 }
                             }
                         },
@@ -362,7 +362,7 @@
                     }],
                     columns: [{
                             render: function(data, type, row, meta) {
-                                return '<button class="btn btn-sm btn-gradient-danger" type="button" onclick="DoDeleteRoomUser(' + row.AssignId + ',' + row.RoomId + ')"> Remove </button>';
+                                return '<button class="btn btn-sm btn-danger" type="button" onclick="DoDeleteRoomUser(' + row.AssignId + ',' + row.RoomId + ')"> <i class="mdi mdi-delete-forever"></i> </button>';
                             }
                         },
                         {

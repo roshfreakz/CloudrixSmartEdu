@@ -1,0 +1,48 @@
+.content-wrapper {
+    background: url("../img/bg (2).jpg");
+    background-size: cover;
+}
+
+.auth .auth-form-light {
+    background-color: rgb(0,0,0,0.7);
+    padding: 2rem;  
+    color: #fff;  
+    border-radius: 10px;
+    box-shadow: 10px 10px 10px 10px rgb(0,0,0,0.2);
+}
+
+.auth form .form-group .form-control {
+    padding: 5px;
+    background-color: transparent !important;
+    color: #fff !important;
+    border: none;
+    border-bottom: 1px solid #fff;
+}
+
+.input-group-append .input-group-text{
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+}
+
+.brand-logo{
+    text-align: center;
+}
+
+#spnViewPassword{
+    cursor: pointer;
+}
+
+#spnViewPassword:hover{
+    color: #000;
+}
+
+.btn-gradient-primary{
+    background: transparent;
+    background-color: #198ae3;
+}
+
+.auth-form-btn.btn-gradient-primary:active{
+    background: transparent !important;
+    background-color: #198ae3 !important;
+}

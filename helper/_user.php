@@ -9,13 +9,12 @@ if (isset($_POST["adduser"]) && !empty($_POST["adduser"])) {
     $Mobile = testinput($_POST["Mobile"]);
     $Email = testinput($_POST["Email"]);
     $UserType = testinput($_POST["UserType"]);
-    $Username = testinput($_POST["Username"]);
     $Password = testinput($_POST["Password"]);
     $PasswordHash = password_hash($Password, PASSWORD_DEFAULT);
 
     $sql = ' INSERT INTO tbl_user ' .
-        ' ( PeerId,  FullName,  Gender,  Mobile,  Email,  UserType,  Username,  PasswordHash, CDate) VALUES ' .
-        ' (:PeerId, :FullName, :Gender, :Mobile, :Email, :UserType, :Username, :PasswordHash, Now()) ';
+        ' ( PeerId,  FullName,  Gender,  Mobile,  Email,  UserType,  PasswordHash, CDate) VALUES ' .
+        ' (:PeerId, :FullName, :Gender, :Mobile, :Email, :UserType, :PasswordHash, Now()) ';
 
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':PeerId', $PeerId, PDO::PARAM_STR);
@@ -24,7 +23,6 @@ if (isset($_POST["adduser"]) && !empty($_POST["adduser"])) {
     $stmt->bindParam(':Mobile', $Mobile, PDO::PARAM_STR);
     $stmt->bindParam(':Email', $Email, PDO::PARAM_STR);
     $stmt->bindParam(':UserType', $UserType, PDO::PARAM_STR);
-    $stmt->bindParam(':Username', $Username, PDO::PARAM_STR);
     $stmt->bindParam(':PasswordHash', $PasswordHash, PDO::PARAM_STR);
 
     try {

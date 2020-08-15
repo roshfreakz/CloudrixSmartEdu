@@ -14,7 +14,8 @@ session_destroy();
   <link rel="stylesheet" href="css/mdi.min.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/login.css">
+
 </head>
 
 <body>
@@ -22,7 +23,7 @@ session_destroy();
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth">
         <div class="row flex-grow">
-          <div class="col-lg-4 col-md-6 col-12 mx-auto">
+          <div class="col-lg-4 col-md-6 col-12 ml-auto mr-5">
             <div class="auth-form-light text-left">
               <div class="brand-logo">
                 <img src="img/logo.png">
@@ -30,28 +31,29 @@ session_destroy();
               <h4>Login</h4>
               <form class="pt-3" id="LoginForm">
                 <div class="form-group">
-                  <label>Username</label>
-                  <input type="text" class="form-control form-control-lg" name="Username" id="Username" placeholder="Username">
-                  <div class="invalid-feedback">Invalid Username</div>
+                  <label>Email</label>
+                  <input type="email" class="form-control form-control-lg" name="Email" id="Email" placeholder="Your Email" required>
+                  <div class="invalid-feedback">Invalid Email</div>
                 </div>
                 <div class="form-group">
                   <label>Password</label>
                   <div class="input-group">
-                    <input type="password" class="form-control form-control-lg" name="Password" id="Password" placeholder="Password">
+                    <input type="password" class="form-control form-control-lg" name="Password" id="Password" placeholder="Your Password" required>
                     <div class="input-group-append">
                       <span class="input-group-text" id="spnViewPassword"> <i class="mdi mdi-eye"></i> </span>
                     </div>
+                    <div class="invalid-feedback">Invalid Password</div>
                   </div>
-                  <div class="invalid-feedback">Invalid Password</div>
+
                 </div>
                 <div class="mt-3">
                   <input type="hidden" name="checklogin" value="1">
                   <button type="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="index.php">Login</button>
                 </div>
                 <div class="my-4 text-center">
-                  <a href="forgot.php" class="auth-link text-black">Forgot password?</a>
+                  <a href="forgot.php" class="auth-link">Forgot password?</a>
                 </div>
-                <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="register.php" class="text-primary">Create</a>
+                <div class="text-center mt-4 font-weight-light"> Don't have an account? <a href="register.php">Create</a>
                 </div>
               </form>
             </div>
@@ -71,7 +73,7 @@ session_destroy();
           $(this.children[0]).removeClass('mdi mdi-eye');
           $(this.children[0]).addClass('mdi mdi-eye-off');
           $('#Password').attr('type', 'text');
-        }else{
+        } else {
           $(this.children[0]).removeClass('mdi mdi-eye-off');
           $(this.children[0]).addClass('mdi mdi-eye');
           $('#Password').attr('type', 'password');
@@ -81,11 +83,11 @@ session_destroy();
 
       $('#LoginForm').on('submit', function(e) {
         e.preventDefault();
-        $('#Username').removeClass('is-invalid');
+        $('#Email').removeClass('is-invalid');
         $('#Password').removeClass('is-invalid');
-        var Username = $('#Username').val();
+        var Email = $('#Email').val();
         var Password = $('#Password').val();
-        if (!Username || !Password) {
+        if (!Email || !Password) {
           $('.form-control').addClass('is-invalid');
         } else {
           var formData = new FormData(this);
@@ -109,7 +111,7 @@ session_destroy();
               if (result == "2") {
                 $('#Password').addClass('is-invalid');
               } else if (result == "3") {
-                $('#Username').addClass('is-invalid');
+                $('#Email').addClass('is-invalid');
               }
             }
           });

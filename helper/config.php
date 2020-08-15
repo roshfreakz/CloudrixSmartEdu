@@ -1,9 +1,10 @@
 <?php
 
-$conn = new PDO('mysql:host=localhost;dbname=cloudrix', 'root', '123456');
+$conn = new PDO('mysql:host=localhost;dbname=smartedu', 'root', '');
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-function testinput($data) {
+function testinput($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = addslashes($data);

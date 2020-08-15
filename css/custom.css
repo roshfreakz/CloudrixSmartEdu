@@ -1,6 +1,7 @@
 /* Root */
 .content-wrapper {
     padding: 1.5rem;
+    background-color: #efefef;
 }
 
 
@@ -11,8 +12,9 @@
 }
 
 .dropdown .dropdown-menu .dropdown-item:hover {
-    background-color: #9021ff;
+   color: #9a55ff;
 }
+
 
 /* Datatable */
 div.dataTables_wrapper div.dataTables_length select {
@@ -31,23 +33,15 @@ table#RoomTable tbody tr {
     width: inherit;
 }
 
-
-/* login */
-.auth .auth-form-light select,
-select.form-control {
-    color: inherit;
+/* Forms */
+input.form-control{
+    border-radius: 5px;
 }
-
-.auth form .form-group .form-control {
-    padding: 15px;
-}
-
-.auth-form-light {
-    padding: 2rem;
-}
-
-.auth .brand-logo {
-    margin-bottom: 1rem;
+select.form-control{
+    border-radius: 5px;
+    color: #495057;
+    outline: none;
+    border: 1px solid #ced4da
 }
 
 
@@ -85,7 +79,7 @@ select.form-control {
     height: 100%;
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: 10px 10px 20px rgb(0,0,0,0.3);
+    box-shadow: 10px 10px 20px rgb(0, 0, 0, 0.3);
     background-color: #fff;
 }
 
@@ -97,7 +91,7 @@ footer .selfvideo {
     width: 20vw;
     object-fit: cover;
     border-radius: 10px;
-    box-shadow: 10px 10px 20px rgb(0,0,0,0.3);
+    box-shadow: 10px 10px 20px rgb(0, 0, 0, 0.3);
     background-color: #fff;
 }
 
@@ -143,15 +137,6 @@ label.badge p {
     margin-bottom: 2rem;
 }
 
-
-/* Login */
-#spnViewPassword{
-    cursor: pointer;
-}
-
-#spnViewPassword:hover{
-    color: #000;
-}
 
 @media only screen and (max-width:500px) {
     footer .selfvideo {
